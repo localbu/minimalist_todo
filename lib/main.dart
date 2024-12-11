@@ -1,4 +1,3 @@
-import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_isar/models/note_database.dart';
@@ -10,21 +9,18 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await NoteDatabase.initialize();
   runApp(
-    DevicePreview(
-      enabled: true,
-      builder: (context) => MultiProvider(
-        providers: [
-          // note provider
-          ChangeNotifierProvider(
-            create: (context) => NoteDatabase(),
-          ),
-          // theme provider
-          ChangeNotifierProvider(
-            create: (context) => ThemeProvider(),
-          ),
-        ],
-        child: MyApp(),
-      ),
+    MultiProvider(
+      providers: [
+        // note provider
+        ChangeNotifierProvider(
+          create: (context) => NoteDatabase(),
+        ),
+        // theme provider
+        ChangeNotifierProvider(
+          create: (context) => ThemeProvider(),
+        ),
+      ],
+      child: MyApp(),
     ),
   );
 }
